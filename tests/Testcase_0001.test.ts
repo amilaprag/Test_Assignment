@@ -8,7 +8,7 @@ import testData from '../config/testdata.json'
 
 test("Testcase-0001 verify product items checkout and ordered sucessfuly", async () => {
 
-    const browser = await chromium.launch({ headless: false });
+    const browser = await chromium.launch({ headless: true });
     const page: Page = await browser.newPage();
     const loginPage = new LoginPage(page);
     const productPage = new ProductPage(page);
