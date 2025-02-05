@@ -25,8 +25,8 @@ test("Testcase-0001 verify product items checkout and ordered sucessfuly", async
     //Product page tests
     await productPage.waitForPageLoad();
     await expect(page).toHaveURL(testData.Testcase_0001.urls.inventory);
-    await productPage.sortBypriceByLow();
-    
+    await productPage.sortBypriceByHigh();
+
     const products = await productPage.getProducts();
     const cheapestProducts = products.slice(0, 3);
     for (const product of cheapestProducts) {
@@ -35,7 +35,7 @@ test("Testcase-0001 verify product items checkout and ordered sucessfuly", async
     }
     await productPage.viewCart();
 
-     //Cart page tests
+    //Cart page tests
     await cartPage.waitForPageLoad();
     await expect(page).toHaveURL(testData.Testcase_0001.urls.cart);
     const cartItems = await cartPage.getCartItems();
@@ -53,7 +53,7 @@ test("Testcase-0001 verify product items checkout and ordered sucessfuly", async
     //Payement page tests
     await paymentPage.waitForPageLoad();
     await expect(page).toHaveURL(testData.Testcase_0001.urls.checkOutStepTwo);
-   
+
     const cartItemCount = await paymentPage.GetCartItems();
     await expect(cartItemCount).toHaveText(testData.Testcase_0001.cartItemCount);
     const totalPrice = await paymentPage.getTotalPrice();
@@ -62,7 +62,7 @@ test("Testcase-0001 verify product items checkout and ordered sucessfuly", async
     expect(totalPriceValue).toBeGreaterThan(0);
 
     const paymentInfo = await paymentPage.verifyPaymentInfo();
-    await expect(paymentInfo).toBeVisible();    
+    await expect(paymentInfo).toBeVisible();
     await paymentPage.clickFinish();
 
     await browser.close();
