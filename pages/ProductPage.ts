@@ -9,6 +9,7 @@ export class ProductPage {
     private addToCartButton = '.inventory_item';
     private cartLink = '.shopping_cart_link';
     private inventoryList = '.inventory_list';
+    private highToLowPrice = "hilo";
 
     constructor(page: Page) {
         this.page = page;
@@ -18,22 +19,23 @@ export class ProductPage {
         await this.page.waitForSelector(this.inventoryList);
     }
 
-    async sortBypriceByLow() {
-        await this.page.selectOption(this.sortDropdown, 'lohi');
+    async sortBypriceByHigh() {
+        await this.page.selectOption(this.sortDropdown, this.highToLowPrice);
         await this.page.waitForSelector(this.inventoryItemName)
     }
 
     async getProducts() {
         const productNames = await this.page.locator(this.inventoryItemName).allTextContents();
         const productPrices = await this.page.locator(this.inventoryItemPrice).allTextContents();
-        return productNames.map((name, index) => ({
+        const products = productNames.map((name, index) => ({
             name,
             price: parseFloat(productPrices[index].replace('$', '')),
             addToCartButton: `${this.addToCartButton}:has-text("${name}") button`
         }));
+        return products.sort((a, b) => a.price - b.price);
     }
 
-    async addToCart( addToCartButton: string ) {
+    async addToCart(addToCartButton: string) {
         await this.page.click(addToCartButton);
     }
 
@@ -41,5 +43,5 @@ export class ProductPage {
         await this.page.click(this.cartLink);
     }
 
-    
+
 }
