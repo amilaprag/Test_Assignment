@@ -1,0 +1,19 @@
+{
+    "Testcase_0001": {
+        "username": "standard_user",
+        "password": "secret_sauce",
+        "checkoutDetails": {
+            "firstName": "Amila",
+            "lastName": "prageeth",
+            "postalCode": "10200"
+        },
+        "urls": {
+            "inventory": "inventory.html",
+            "cart":"cart.html",
+            "checkOutStepOne":"checkout-step-one.html",
+            "checkOutStepTwo":"checkout-step-two.html"
+        },
+        "dollorMark":"$",
+        "cartItemCount":"2"
+    }
+}
